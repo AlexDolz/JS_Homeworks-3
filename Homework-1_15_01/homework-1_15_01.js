@@ -56,7 +56,7 @@ initCap(words);
 
 function initCap2(array) {
   const newArray = array.map(
-    elem => elem.slice(0, 1).toUpperCase() + elem.slice(1, elem.length)
+    elem => elem.slice(0, 1).toUpperCase() + elem.slice(1)
   );
   console.log(newArray);
 }
