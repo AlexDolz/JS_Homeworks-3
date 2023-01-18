@@ -89,7 +89,7 @@ const fullNames = names.map(elem => {
   if (elem.includes(' ')) {
     return elem.split(' ');
   } else {
-    return [elem + ' ' + undefined];
+    return [elem, undefined];
   }
 });
 console.log(fullNames);
@@ -97,6 +97,21 @@ console.log(fullNames);
 // Ternary operator
 
 const fullNamesTernary = names.map(elem =>
-  elem.includes(' ') ? elem.split(' ') : [`${elem}, undefined`]
+  elem.includes(' ') ? elem.split(' ') : [elem, undefined]
 );
 console.log(fullNamesTernary);
+
+// 2 Solution
+
+let fullNames2 = [];
+
+for (let elem of names) {
+  let elemArray = elem.split(' ');
+  if (elemArray.length == 2) {
+    fullNames2.push(elemArray);
+  } else if (elemArray.length == 1) {
+    elemArray.push(undefined);
+    fullNames2.push(elemArray);
+  }
+}
+console.log(fullNames2);
