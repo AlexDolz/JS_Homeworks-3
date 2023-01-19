@@ -14,7 +14,7 @@ let elems = [
 // 1 Solution
 
 const updatedArray = elems.map(elem =>
-  elem.replace('<div><p class="text">', '').replace('</p></div>', '')
+  elem.slice(elem.indexOf('">') + 2, elem.indexOf('</'))
 );
 console.log(updatedArray);
 
@@ -48,9 +48,9 @@ function initCap(array) {
   const newArray = array.map(elem =>
     elem.replace(elem[0], elem[0].toUpperCase())
   );
-  console.log(newArray);
+  return newArray;
 }
-initCap(words);
+console.log(initCap(words));
 
 // 2 Solution
 
@@ -58,9 +58,9 @@ function initCap2(array) {
   const newArray = array.map(
     elem => elem.slice(0, 1).toUpperCase() + elem.slice(1)
   );
-  console.log(newArray);
+  return newArray;
 }
-initCap2(words);
+console.log(initCap2(words));
 
 // **************************** Task 3 *******************************
 // 3. Задан массив names.
