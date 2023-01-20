@@ -7,14 +7,14 @@
 let elems = [
   '<div><p class="text">Home</p></div>',
   '<div><p class="text">About</p></div>',
-  '<div><p class="text">FAQ</p></div>',
-  '<div><p class="text">Contacts</p></div>',
+  '<div><p class="text2">FAQ</p></div>',
+  '<div><p>Contacts</p></div>',
 ];
 
 // 1 Solution
 
 const updatedArray = elems.map(elem =>
-  elem.slice(elem.indexOf('">') + 2, elem.indexOf('</'))
+  elem.slice(elem.indexOf('>', elem.indexOf('>') + 1) + 1, elem.indexOf('</'))
 );
 console.log(updatedArray);
 
