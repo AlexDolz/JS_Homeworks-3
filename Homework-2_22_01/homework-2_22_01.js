@@ -3,6 +3,7 @@
 // 1. Напишите функцию checkDate() которая в консоль отобразит количество дней до конца текущего месяца.
 // Примечание: инициализация дат должна быть внутри функции
 
+// 1 Solution
 function checkDate() {
   const date = new Date();
   const nowDate = date.getDate();
@@ -17,6 +18,16 @@ function checkDate() {
 
 checkDate();
 
+// 2 Solution
+function checkDate2() {
+  const dateNow = new Date();
+  const dateNext = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, 1); // +1 - plus month, 1 - day
+  const result =
+    (dateNext.getTime() - dateNow.getTime()) / (1000 * 60 * 60 * 24);
+  console.log(Math.floor(result));
+}
+checkDate2();
+
 // **************************** Task 2 *******************************
 // 2. Создайте функцию isItFridayToday(), которая выводит сообщение согласно условию:
 // Если текущая дата определит пятницу, функция должна в консоль отобразить ответ “Сегодня пятница”!
@@ -26,9 +37,9 @@ checkDate();
 
 // Предусмотрите вывод 4 пункта (дня, дней)
 
+// 1 Solution
 function isItFridayToday() {
-  const date = new Date();
-  let day = date.getDay();
+  const day = new Date().getDay();
   if (day === 5) {
     console.log(`Сегодня пятница!`);
   } else if (day === 4) {
@@ -43,6 +54,23 @@ function isItFridayToday() {
 }
 
 isItFridayToday();
+
+// 2 Solution
+function isItFridayToday2() {
+  const day = new Date().getDay();
+  const array = [
+    'Пятница будет через 5 дней',
+    'Пятница будет через 4 дня',
+    'Пятница будет через 3 дня',
+    'Пятница будет через 2 дня',
+    'Завтра пятница!',
+    'Сегодня пятница!',
+    'Пятница была вчера',
+  ];
+  console.log(array[day]);
+}
+
+isItFridayToday2();
 
 // ******************************* Task 3 ***************************
 // Задан массив prices, передающий элементы строкового типа. Напишите функцию getInfo(prices), которая получает массив и возвращает количество элементов, которые начинаются на “Цена” и количество элементов, которые заканчиваются на “$” в виде массива по примеру:
@@ -94,6 +122,24 @@ function getInfo2(prices) {
 }
 console.log(getInfo2(prices));
 
+// 3 Solution
+
+function getInfo3(array) {
+  let result = [0, 0];
+
+  prices.forEach(elem => {
+    if (elem.startsWith('Цена')) {
+      result[0]++;
+    }
+    if (elem.endsWith('$')) {
+      result[1]++;
+    }
+  });
+  return result;
+}
+
+console.log(getInfo3(prices));
+
 // ************************ Task 4 **********************************
 // 4. Задан массив array. Сформируйте два новых массива phones и emails, которые будут содержать данные по примеру:
 
@@ -126,6 +172,8 @@ let array = [
   '89840959922 some@yandex.com',
 ];
 
+// 1 Solution
+
 const emails = [];
 const phones = [];
 
@@ -143,6 +191,29 @@ for (let elem of array) {
 }
 console.log(emails);
 console.log(phones);
+
+// 2 Solution
+// if change places of elements this solution will not work
+
+const emails2 = [];
+const phones2 = [];
+
+array.forEach(elem => {
+  let row = elem.split(' ');
+  if (row.length == 2) {
+    phones2.push(row[0]);
+    emails2.push(row[1]);
+  } else {
+    if (elem.includes('@')) {
+      emails2.push(elem);
+    } else {
+      phones2.push(elem);
+    }
+  }
+});
+
+console.log(emails2);
+console.log(phones2);
 
 // *************************** Task 5 *******************************
 // Задан массив cards, передающий элементы строкового типа. Необходимо зашифровать номера карт по следующему правилу: заменить всю строку на 5 символов “*”, оставив первые 4 и последние 4 цифры.
@@ -169,13 +240,13 @@ let cards = [
 
 // 1 Solution
 
-const newCards = cards.map(elem => elem.replaceAll(elem.slice(4, 15), '*****'));
+const newCards = cards.map(elem => elem.replace(elem.slice(4, 15), '*****'));
 
 console.log(newCards);
 
 // 2 Solution
 
 for (let i in cards) {
-  cards[i] = cards[i].replaceAll(/\s\d{0,4}\s\d{0,4}\s/g, '*****');
+  cards[i] = cards[i].replace(/\s\d{0,4}\s\d{0,4}\s/g, '*****');
 }
 console.log(cards);
