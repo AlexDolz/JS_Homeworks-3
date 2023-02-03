@@ -133,7 +133,7 @@ console.log(getEntries(someObj2)); // [['key1', 'value1'],['key2', 'value2'],['k
 let array3 = [1, true, '3', 'value1', 9, 'key'];
 
 let newObject = {};
-array3.forEach((elem, key) => (newObject[`key${key + 1}`] = elem));
+array3.forEach((elem, ind) => (newObject[`key${ind + 1}`] = elem));
 
 console.log(newObject); // {  key1: 1, key2: true, key3: '3', key4: 'value1', key5: 9, key6: 'key'}
 
