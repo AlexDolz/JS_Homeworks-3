@@ -1,4 +1,4 @@
-// ************************* Task 1 *********************************
+// ************************* Task 1 ******************************
 
 // В программе объявлена переменная order, которая хранит объект. Объявите переменную descriptor, которая должна содержать значения всех атрибутов ключа totalPrice объекта orders в виде массива. Результат выведите в консоль. Пример значений переменных:
 
@@ -22,7 +22,13 @@ for (let key in descriptor) {
 
 console.log(array); // [['value', 15000], ['writable', true], ['enumerable', true], ['configurable', true]]
 
-// ***************************** Task 2 ******************************
+// 2 Solution
+
+const descriptor2 = Object.getOwnPropertyDescriptor(order, 'totalPrice');
+
+console.log(Object.entries(descriptor2)); // [['value', 15000], ['writable', true], ['enumerable', true], ['configurable', true]]
+
+// ***************************** Task 2 ***************************
 
 // В программе задан объект employees, который содержит ряд свойств и методов. Сформируйте строку с именами всех свойств через запятую и пробел (, ) и выведите в консоль. Имена методов добавляться не должны. Пример значений переменных:
 
@@ -38,15 +44,10 @@ let employees = {
   },
 };
 
-const string = Object.keys(employees).slice(0, -1).join(', ');
-
-console.log(string); // firstName, lastName, ratePerDay, workingDays
-
-// 2 Solution
 let array2 = [];
 let string2;
 
-for (key in employees) {
+for (let key in employees) {
   if (typeof employees[key] !== 'function') {
     array2.push(key);
   }
@@ -55,7 +56,7 @@ for (key in employees) {
 
 console.log(string2); // firstName, lastName, ratePerDay, workingDays
 
-// ***************************** Task 3 ******************************
+// ***************************** Task 3 ***************************
 
 // В программе объявлены переменные name и phone, которые хранят строки. В name указано название заведения, а в phone — его номер телефона. Создайте класс Delivery со свойствами name и phone. Помимо описанных свойств, добавьте свойство validPhone, которое проверяет значение свойства phone на вхождение знака + в начале строки. Если знак отсутствует, свойство validPhone должно принять булевое значение false, в противном случае — true. Создайте экземпляр класса Delivery и в качестве аргументов конструктора укажите значения переменных name и phone. Получившийся экземпляр класса запишите в переменную deliveryName.
 
@@ -71,27 +72,22 @@ class Delivery {
     this.name = name;
     this.phone = phone;
   }
-  validPhone() {
-    if (this.phone.startsWith('+')) {
-      return true;
-    } else {
-      return false;
-    }
+  get validPhone() {
+    return this.phone.startsWith('+');
   }
 }
 
-let test = new Delivery('Pizza', '81234567890');
-let deliveryName = test.validPhone();
+let test = new Delivery('Pizza', '+81234567890');
+test.phone = '11231234';
+console.log(test.validPhone); // false
 
-console.log(deliveryName); // false
+// ****************************** Task 4 **************************
 
-// ****************************** Task 4 *****************************
-
-// В программе создан класс Permissions, свойства которого описывают права пользователей на редактирование статей на сайте. Создайте новый класс User, который наследуется от класса Permissions. Дополнительно в классе User добавьте свойство name, значение которого класс принимает в качестве аргумента конструктора.
+// В программе создан класс Permission, свойства которого описывают права пользователей на редактирование статей на сайте. Создайте новый класс User, который наследуется от класса Permissions. Дополнительно в классе User добавьте свойство name, значение которого класс принимает в качестве аргумента конструктора.
 
 // Входные данные:
 
-class Permissions {
+class Permission {
   constructor() {
     this.create = false;
     this.read = true;
@@ -100,7 +96,7 @@ class Permissions {
   }
 }
 
-class User extends Permissions {
+class User extends Permission {
   constructor(name) {
     super();
     this.name = name;
