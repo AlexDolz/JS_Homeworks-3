@@ -74,23 +74,24 @@ let n = 1;
 
 const [prevBtn, nextBtn] = document.querySelectorAll('button');
 
-function changeProduct(n) {
-  fetch(`https://dummyjson.com/products/${n}`)
-    .then(res => res.json())
-    .then(data => renderProduct(data));
-}
-
 prevBtn.addEventListener('click', () => {
   if (n === 1) {
     n = 31;
   }
-  changeProduct(--n);
+  getProducts(--n);
 });
 nextBtn.addEventListener('click', () => {
   if (n === 30) {
     n = 0;
   }
-  changeProduct(++n);
+  getProducts(++n);
 });
+
+// function fetchLength() {
+//   fetch(`https://dummyjson.com/products/`)
+//     .then(res => res.json())
+//     .then(data => console.log(data.products.length));
+// }
+// fetchLength();
 
 getProducts(1);
