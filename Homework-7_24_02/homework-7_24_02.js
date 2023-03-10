@@ -2,11 +2,11 @@
 const header = document.querySelector('.header');
 const burgerMenu = document.querySelector('.burger__menu');
 
+let menuElems = ['Главная', 'Услуги', 'Кейсы', 'О компании', 'Контакты'];
 let setModal = false;
 
 function openMenu() {
   if (!setModal) {
-    let menuElems = ['Главная', 'Услуги', 'Кейсы', 'О компании', 'Контакты'];
     const modalDiv = document.createElement('div');
     modalDiv.className = 'modal';
 
@@ -26,6 +26,23 @@ function openMenu() {
     burgerMenu.style.height = '16px';
 
     header.after(modalDiv);
+    const [mainModal, servicesModal, casesModal, aboutModal, contacsModal] =
+      document.querySelectorAll('.modal p');
+    mainModal.addEventListener('click', () =>
+      header.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    );
+    servicesModal.addEventListener('click', () =>
+      sections[0].scrollIntoView({ behavior: 'smooth', block: 'start' })
+    );
+    casesModal.addEventListener('click', () =>
+      sections[1].scrollIntoView({ behavior: 'smooth', block: 'end' })
+    );
+    aboutModal.addEventListener('click', () =>
+      sections[1].scrollIntoView({ behavior: 'smooth', block: 'start' })
+    );
+    contacsModal.addEventListener('click', () =>
+      sections[4].scrollIntoView({ behavior: 'smooth', block: 'start' })
+    );
   } else {
     const [spanELem1, spanELem2, spanELem3] =
       document.querySelectorAll('.line');
@@ -37,11 +54,35 @@ function openMenu() {
     spanELem3.style.transform = 'none';
     burgerMenu.style.height = '43px';
     const modal = document.querySelector('.modal');
+
     modal.remove();
   }
   setModal = !setModal;
 }
 burgerMenu.addEventListener('click', openMenu);
+
+// ********************** Auto scroll ***********************************
+
+const sections = document.querySelectorAll('section');
+
+const [mainNav, servicesNav, casesNav, aboutNav, contacsNav] =
+  document.querySelectorAll('.nav__item');
+
+mainNav.addEventListener('click', () =>
+  header.scrollIntoView({ behavior: 'smooth', block: 'start' })
+);
+servicesNav.addEventListener('click', () =>
+  sections[0].scrollIntoView({ behavior: 'smooth', block: 'start' })
+);
+casesNav.addEventListener('click', () =>
+  sections[1].scrollIntoView({ behavior: 'smooth', block: 'end' })
+);
+aboutNav.addEventListener('click', () =>
+  sections[1].scrollIntoView({ behavior: 'smooth', block: 'start' })
+);
+contacsNav.addEventListener('click', () =>
+  sections[4].scrollIntoView({ behavior: 'smooth', block: 'start' })
+);
 
 // *********************** Header slider ********************************
 
